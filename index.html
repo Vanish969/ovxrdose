@@ -250,7 +250,8 @@ cursor:pointer;
 </div>
 
 <!-- MULTI DOT CURSOR -->
-<div class="cursor-dot" id="dot0"></div>
+<div class="cursor-dot" id="dot0"></div>-+
+  63
 <div class="cursor-dot" id="dot1"></div>
 <div class="cursor-dot" id="dot2"></div>
 <div class="cursor-dot" id="dot3"></div>
@@ -298,7 +299,7 @@ localStorage.setItem("visits",visits);
 document.getElementById("visitCount").innerText=visits;
 
 function startTypingLoop(){
-const text="nag mamahal sainyo rev$hit";
+const text="world wide threat";
 const el=document.getElementById("typing");
 let i=0,deleting=false;
 
@@ -322,7 +323,7 @@ for(let i=0;i<trailLength;i++){
   dots.push(document.getElementById("dot"+i));
 }
 
-// Independent position objects for each dot
+
 let positions = [];
 for(let i=0;i<trailLength;i++){
   positions.push({x:0,y:0});
@@ -369,4 +370,5 @@ if(e.ctrlKey && e.key==="U"){e.preventDefault();showWarning();}
 </script>
 
 </body>
+
 </html>
