@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@ovxrdose</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+.revshit-text {
+  margin-top: 6px;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: white;
+  opacity: 0.6;
+  text-align: center;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+cursor:none;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+background:black;
+color:white;
+font-family:sans-serif;
+}
+
+.enter{
+position:fixed;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:'Bebas Neue', sans-serif;
+font-size:30px;
+letter-spacing:4px;
+backdrop-filter:blur(30px);
+background:rgba(0,0,0,0.35);
+cursor:pointer;
+z-index:100;
+transition:1.2s ease;
+}
+
+.enter.fade{
+opacity:0;
+pointer-events:none;
+}
+
+.bg{
+position:absolute;
+inset:0;
+background-size:cover;
+background-position:center;
+filter:blur(18px) brightness(40%);
+animation:zoom 25s infinite alternate ease-in-out;
+}
+
+@keyframes zoom{
+from{transform:scale(1.05);}
+to{transform:scale(1.2);}
+}
+
+.card{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+}
+
+.profile-wrapper{
+position: relative;
+width:135px;
+height:135px;
+margin:0 auto;
+}
+
+.profile-wrapper::before{
+content:"";
+position:absolute;
+top:-8px;
+left:-8px;
+right:-8px;
+bottom:-8px;
+border-radius:50%;
+background:white; /* white glow */
+filter: blur(12px); /* glow intensity */
+z-index:1;
+}
+
+.profile{
+width:100%;
+height:100%;
+border-radius:50%;
+object-fit:cover;
+position:relative;
+z-index:2;
+}
+
+.username{
+font-family:'Playfair Display', serif;
+font-weight:700;
+font-size:34px;
+letter-spacing:2px;
+text-transform:lowercase;
+text-shadow:0 0 10px #fff;
+}
+
+.gif-row{
+margin-top:10px;
+display:flex;
+justify-content:center;
+gap:10px;
+}
+
+.gif-row img{
+width:45px;
+height:45px;
+border-radius:6px;
+}
+
+.bio{
+margin-top:12px;
+font-family:'Playfair Display', serif;
+font-size:16px;
+white-space:nowrap;
+overflow:hidden;
+min-height:20px;
+}
+
+.socials{
+margin-top:20px;
+display:flex;
+justify-content:center;
+gap:18px;
+}
+
+.socials img{
+width:26px;
+}
+
+.visits{
+margin-top:20px;
+font-size:11px;
+opacity:0.4;
+}
+
+/* MULTI-DOT CURSOR */
+.cursor-dot {
+  position:fixed;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:white;
+  pointer-events:none;
+  transform:translate(-50%, -50%);
+  z-index:9999;
+  opacity:0.8;
+  filter:drop-shadow(0 0 4px white);
+}
+
+#skidWarning{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99999;
+background:rgba(0,0,0,0.35);
+backdrop-filter:blur(25px);
+}
+
+.skid-box{
+text-align:center;
+font-family:'Bebas Neue',sans-serif;
+color:white;
+}
+
+.skid-box h1{
+letter-spacing:6px;
+font-size:32px;
+margin-bottom:10px;
+}
+
+.skid-box p{
+opacity:0.7;
+margin-bottom:20px;
+}
+
+.skid-box button{
+background:white;
+color:black;
+border:none;
+padding:10px 20px;
+border-radius:6px;
+font-family:'Bebas Neue',sans-serif;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="enter" onclick="enterSite()">doxx me</div>
+
+<div class="bg" id="bg"></div>
+
+<div class="card">
+
+<div class="profile-wrapper">
+  <img src="https://i.imgur.com/Fe7dsbm.png" class="profile">
+</div>
+
+<div class="username">ovxrdose</div>
+
+<div class="gif-row">
+<img src="https://cdn.discordapp.com/emojis/1181217742850891807.gif">
+<img src="https://cdn.discordapp.com/emojis/1441763213980074138.gif">
+<img src="https://cdn.discordapp.com/emojis/1197092976892059658.gif">
+</div>
+
+<div class="bio">
+  <span id="typing"></span>
+  <div class="revshit-text">rev$hit</div>
+</div>
+
+<div class="socials">
+<a href="https://open.spotify.com/user/31x5u7mi6iduaumybgkdhaghq2ba?si=AIJDy0v0Qz2qfPqi7MdK0g"><img src="https://i.imgur.com/P30vY7g.png"></a>
+<a href="https://discordapp.com/users/958614271221182484"><img src="https://i.imgur.com/avA16Ge.png"></a>
+<a href="https://roblox.com/users/5509864597/profile"><img src="https://i.imgur.com/dyqAqba.png"></a>
+<a href="https://www.instagram.com/ovxrdosez_?igsh=bmFrcXZsdXMwZzJ5"><img src="https://i.imgur.com/84yV39M.png"></a>
+
+</div>
+
+<div class="visits">visitors: <span id="visitCount">0</span></div>
+
+</div>
+
+<!-- MULTI DOT CURSOR -->
+<div class="cursor-dot" id="dot0"></div>
+<div class="cursor-dot" id="dot1"></div>
+<div class="cursor-dot" id="dot2"></div>
+<div class="cursor-dot" id="dot3"></div>
+<div class="cursor-dot" id="dot4"></div>
+<div class="cursor-dot" id="dot5"></div>
+
+<audio id="bgMusic" loop>
+<source src="mosthigh3.mp3" type="audio/mpeg">
+</audio>
+
+<div id="skidWarning">
+<div class="skid-box">
+<h1>WAG SKID PLZZZZZ</h1>
+<p>BAWAL TANGA RITO</p>
+<button onclick="closeWarning()">TANGA AKO GETS KO</button>
+</div>
+</div>
+
+<script>
+
+function enterSite(){
+document.querySelector(".enter").classList.add("fade");
+document.getElementById("bgMusic").play().catch(()=>{});
+startTypingLoop();
+}
+
+const backgrounds=[
+"https://i.imgur.com/uFygyqT.gif",
+"https://i.imgur.com/WkRGm5F.gif",
+"https://i.imgur.com/KtG0GJk.gif",
+"https://i.imgur.com/B1UipWZ.gif",
+"https://i.imgur.com/vWvOoTE.gif"
+];
+
+function setRandomBackground(){
+const randomBg=backgrounds[Math.floor(Math.random()*backgrounds.length)];
+document.getElementById("bg").style.backgroundImage=`url(${randomBg})`;
+}
+
+setRandomBackground();
+
+let visits=localStorage.getItem("visits");
+visits=visits?Number(visits)+1:1;
+localStorage.setItem("visits",visits);
+document.getElementById("visitCount").innerText=visits;
+
+function startTypingLoop(){
+const text="nag mamahal sainyo rev$hit";
+const el=document.getElementById("typing");
+let i=0,deleting=false;
+
+function loop(){
+if(!deleting){
+el.textContent=text.substring(0,i++);
+if(i>text.length){deleting=true;setTimeout(loop,1200);return;}
+}else{
+el.textContent=text.substring(0,i--);
+if(i===0){deleting=false;}
+}
+setTimeout(loop,deleting?40:70);
+}
+loop();
+}
+
+// MULTI-DOT CURSOR
+const dots = [];
+const trailLength = 6;
+for(let i=0;i<trailLength;i++){
+  dots.push(document.getElementById("dot"+i));
+}
+
+// Independent position objects for each dot
+let positions = [];
+for(let i=0;i<trailLength;i++){
+  positions.push({x:0,y:0});
+}
+
+let mouseX=0, mouseY=0;
+
+document.addEventListener("mousemove", e=>{
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animateDots(){
+  positions.unshift({x:mouseX, y:mouseY});
+  positions.pop();
+  
+  dots.forEach((dot,i)=>{
+    const pos = positions[i];
+    dot.style.left = pos.x + "px";
+    dot.style.top = pos.y + "px";
+  });
+  
+  requestAnimationFrame(animateDots);
+}
+
+animateDots();
+
+const warning=document.getElementById("skidWarning");
+
+function showWarning(){warning.style.display="flex";}
+function closeWarning(){warning.style.display="none";}
+
+document.addEventListener("contextmenu",function(e){e.preventDefault();showWarning();});
+let pressTimer;
+document.addEventListener("touchstart",function(){pressTimer=setTimeout(showWarning,600);});
+document.addEventListener("touchend",function(){clearTimeout(pressTimer);});
+document.addEventListener("keydown",function(e){
+if(e.key==="F12"){e.preventDefault();showWarning();}
+if(e.ctrlKey && e.shiftKey && e.key==="I"){e.preventDefault();showWarning();}
+if(e.ctrlKey && e.shiftKey && e.key==="J"){e.preventDefault();showWarning();}
+if(e.ctrlKey && e.key==="U"){e.preventDefault();showWarning();}
+});
+
+</script>
+
+</body>
+</html>
