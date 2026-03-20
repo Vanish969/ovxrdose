@@ -5,19 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>@ovxrdose</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 
 <style>
-
-.revshit-text {
-  margin-top: 6px;
-  font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  color: white;
-  opacity: 0.6;
-  text-align: center;
-}
 
 *{
 margin:0;
@@ -34,15 +26,28 @@ color:white;
 font-family:sans-serif;
 }
 
+/* CANVAS TRAIL */
+#trailCanvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:9999;
+}
+
+/* ENTER */
 .enter{
 position:fixed;
 inset:0;
 display:flex;
 justify-content:center;
 align-items:center;
-font-family:'Bebas Neue', sans-serif;
+font-family:'Montserrat', sans-serif;
 font-size:30px;
-letter-spacing:4px;
+font-weight: 900;
+letter-spacing:2px;
 backdrop-filter:blur(30px);
 background:rgba(0,0,0,0.35);
 cursor:pointer;
@@ -55,6 +60,7 @@ opacity:0;
 pointer-events:none;
 }
 
+/* BG */
 .bg{
 position:absolute;
 inset:0;
@@ -69,6 +75,7 @@ from{transform:scale(1.05);}
 to{transform:scale(1.2);}
 }
 
+/* CARD */
 .card{
 position:absolute;
 top:50%;
@@ -77,42 +84,99 @@ transform:translate(-50%,-50%);
 text-align:center;
 }
 
-.profile-wrapper{
-position: relative;
-width:135px;
-height:135px;
-margin:0 auto;
+.profile-wrapper {
+  position: relative;
+  width: 135px;
+  height: 135px;
+  margin: 0 auto;
 }
 
-.profile-wrapper::before{
-content:"";
-position:absolute;
-top:-8px;
-left:-8px;
-right:-8px;
-bottom:-8px;
-border-radius:50%;
-background:white; /* white glow */
-filter: blur(12px); /* glow intensity */
-z-index:1;
+.profile-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 200%;
+  background: conic-gradient(
+      from 0deg,
+      #0e0e0e,
+      #ffffff,
+      #888888,
+      #ffffff,
+      #000000,
+      #ffffff,
+      #000000,
+      #ffffff,
+     #000000
+  );
+  background-size: 400% 400%;
+  animation: borderAnimation 4s linear infinite;
+  transition: transform 0.3s ease;
+  z-index: 1;
+  filter: blur(8px);
 }
 
-.profile{
-width:100%;
-height:100%;
-border-radius:50%;
-object-fit:cover;
-position:relative;
-z-index:2;
+.profile-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: white;
+  filter: blur(12px);
+  z-index: 0;
 }
 
-.username{
-font-family:'Playfair Display', serif;
-font-weight:700;
-font-size:34px;
-letter-spacing:2px;
-text-transform:lowercase;
-text-shadow:0 0 10px #fff;
+.profile {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes borderAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+@keyframes borderAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* TEXT */
+.username {
+  font-family: 'Inter',sans-serif;
+  font-weight: 700;
+  font-size: 34px;
+  letter-spacing: 0px;
+  text-transform: lowercase;
+  text-shadow: 0 0 10px #fff;
+  background: linear-gradient(90deg, #ffffff 0%, #d9d9d9 50%, #ffffff 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: namePop 0.5s ease-out both, nameGradient 6s ease-in-out infinite;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes namePop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes nameGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .gif-row{
@@ -137,6 +201,12 @@ overflow:hidden;
 min-height:20px;
 }
 
+.revshit-text{
+margin-top:6px;
+font-size:14px;
+opacity:0.6;
+}
+
 .socials{
 margin-top:20px;
 display:flex;
@@ -154,73 +224,20 @@ font-size:11px;
 opacity:0.4;
 }
 
-/* MULTI-DOT CURSOR */
-.cursor-dot {
-  position:fixed;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:white;
-  pointer-events:none;
-  transform:translate(-50%, -50%);
-  z-index:9999;
-  opacity:0.8;
-  filter:drop-shadow(0 0 4px white);
-}
-
-#skidWarning{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:none;
-justify-content:center;
-align-items:center;
-z-index:99999;
-background:rgba(0,0,0,0.35);
-backdrop-filter:blur(25px);
-}
-
-.skid-box{
-text-align:center;
-font-family:'Bebas Neue',sans-serif;
-color:white;
-}
-
-.skid-box h1{
-letter-spacing:6px;
-font-size:32px;
-margin-bottom:10px;
-}
-
-.skid-box p{
-opacity:0.7;
-margin-bottom:20px;
-}
-
-.skid-box button{
-background:white;
-color:black;
-border:none;
-padding:10px 20px;
-border-radius:6px;
-font-family:'Bebas Neue',sans-serif;
-cursor:pointer;
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="enter" onclick="enterSite()">doxx me</div>
+<canvas id="trailCanvas"></canvas>
 
+<div class="enter" onclick="enterSite()">doxx me</div>
 <div class="bg" id="bg"></div>
 
 <div class="card">
 
 <div class="profile-wrapper">
+  <div class="ring"></div>
   <img src="https://i.imgur.com/Fe7dsbm.png" class="profile">
 </div>
 
@@ -233,51 +250,57 @@ cursor:pointer;
 </div>
 
 <div class="bio">
-  <span id="typing"></span>
-  <div class="revshit-text">rev$hit</div>
+<span id="typing"></span>
+<div class="revshit-text">772</div>
 </div>
 
-<div class="socials">
-<a href="https://open.spotify.com/user/31x5u7mi6iduaumybgkdhaghq2ba?si=AIJDy0v0Qz2qfPqi7MdK0g"><img src="https://i.imgur.com/P30vY7g.png"></a>
-<a href="https://discordapp.com/users/958614271221182484"><img src="https://i.imgur.com/avA16Ge.png"></a>
-<a href="https://roblox.com/users/5509864597/profile"><img src="https://i.imgur.com/dyqAqba.png"></a>
-<a href="https://www.instagram.com/ovxrdosez_?igsh=bmFrcXZsdXMwZzJ5"><img src="https://i.imgur.com/84yV39M.png"></a>
 
+<div class="socials">
+<div class="socials">
+<a href="https://open.spotify.com/user/31x5u7mi6iduaumybgkdhaghq2ba?si=AIJDy0v0Qz2qfPqi7MdK0g" 
+     target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+    <img src="https://cdn.simpleicons.org/spotify/ffffff" alt="Spotify">
+  </a>
+
+  <!-- Roblox -->
+  <a href="https://www.roblox.com/users/5509864597/profile" 
+     target="_blank" rel="noopener noreferrer" aria-label="Roblox">
+    <img src="https://cdn.simpleicons.org/roblox/ffffff" alt="Roblox">
+  </a>
+
+  <!-- Discord -->
+  <a href="https://discord.com/users/958614271221182484" 
+     target="_blank" rel="noopener noreferrer" aria-label="Discord">
+    <img src="https://cdn.simpleicons.org/discord/ffffff" alt="Discord">
+  </a>
+
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/ovxrdosez_" 
+     target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+    <img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram">
+  </a>
+</div>
 </div>
 
 <div class="visits">visitors: <span id="visitCount">0</span></div>
 
-</div>
 
-<!-- MULTI DOT CURSOR -->
-<div class="cursor-dot" id="dot0"></div>-+
-  63
-<div class="cursor-dot" id="dot1"></div>
-<div class="cursor-dot" id="dot2"></div>
-<div class="cursor-dot" id="dot3"></div>
-<div class="cursor-dot" id="dot4"></div>
-<div class="cursor-dot" id="dot5"></div>
+</div>
 
 <audio id="bgMusic" loop>
 <source src="mosthigh3.mp3" type="audio/mpeg">
 </audio>
 
-<div id="skidWarning">
-<div class="skid-box">
-<h1>WAG SKID PLZZZZZ</h1>
-<p>BAWAL TANGA RITO</p>
-<button onclick="closeWarning()">TANGA AKO GETS KO</button>
-</div>
-</div>
-
 <script>
 
+// ENTER
 function enterSite(){
 document.querySelector(".enter").classList.add("fade");
 document.getElementById("bgMusic").play().catch(()=>{});
 startTypingLoop();
 }
 
+// BG
 const backgrounds=[
 "https://i.imgur.com/uFygyqT.gif",
 "https://i.imgur.com/WkRGm5F.gif",
@@ -285,21 +308,17 @@ const backgrounds=[
 "https://i.imgur.com/B1UipWZ.gif",
 "https://i.imgur.com/vWvOoTE.gif"
 ];
+document.getElementById("bg").style.backgroundImage=`url(${backgrounds[Math.floor(Math.random()*backgrounds.length)]})`;
 
-function setRandomBackground(){
-const randomBg=backgrounds[Math.floor(Math.random()*backgrounds.length)];
-document.getElementById("bg").style.backgroundImage=`url(${randomBg})`;
-}
-
-setRandomBackground();
-
+// VISITS
 let visits=localStorage.getItem("visits");
 visits=visits?Number(visits)+1:1;
 localStorage.setItem("visits",visits);
 document.getElementById("visitCount").innerText=visits;
 
+// TYPING
 function startTypingLoop(){
-const text="world wide threat";
+const text="my silence screams louder than words.";
 const el=document.getElementById("typing");
 let i=0,deleting=false;
 
@@ -316,59 +335,76 @@ setTimeout(loop,deleting?40:70);
 loop();
 }
 
-// MULTI-DOT CURSOR
-const dots = [];
-const trailLength = 6;
-for(let i=0;i<trailLength;i++){
-  dots.push(document.getElementById("dot"+i));
+// 🔥 PARTICLE CURSOR
+const canvas = document.getElementById("trailCanvas");
+const ctx = canvas.getContext("2d");
+
+let SCALE = window.devicePixelRatio || 1;
+
+function resizeCanvas(){
+canvas.width = window.innerWidth * SCALE;
+canvas.height = window.innerHeight * SCALE;
 }
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
-
-let positions = [];
-for(let i=0;i<trailLength;i++){
-  positions.push({x:0,y:0});
-}
-
-let mouseX=0, mouseY=0;
+let trail = [];
+const maxTrail = 40;
 
 document.addEventListener("mousemove", e=>{
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+trail.push({
+x: e.clientX * SCALE,
+y: e.clientY * SCALE,
+vx: (Math.random()-0.5)*1.5,
+vy: (Math.random()-0.5)*1.5,
+r: Math.random()*3+1,
+life: 1,
+decay: 0.02
+});
 });
 
-function animateDots(){
-  positions.unshift({x:mouseX, y:mouseY});
-  positions.pop();
-  
-  dots.forEach((dot,i)=>{
-    const pos = positions[i];
-    dot.style.left = pos.x + "px";
-    dot.style.top = pos.y + "px";
-  });
-  
-  requestAnimationFrame(animateDots);
+// 👉 FUNCTION MO
+function drawTrail() {
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.shadowColor = 'rgba(255,255,255,0.8)';
+ctx.shadowBlur = 6 * SCALE;
+
+let active = 0;
+
+for (const p of trail) {
+if (p.life <= 0) continue;
+
+active++;
+
+p.x += p.vx;
+p.y += p.vy;
+p.vy += 0.01;
+
+p.life -= p.decay;
+p.scale = Math.max(0, p.life);
+
+ctx.globalAlpha = p.life;
+ctx.fillStyle = '#ffffff';
+
+ctx.beginPath();
+ctx.arc(p.x, p.y, p.r * p.scale, 0, Math.PI * 2);
+ctx.fill();
+
+if (active > maxTrail) break;
 }
 
-animateDots();
+ctx.shadowBlur = 0;
+ctx.globalAlpha = 1;
+}
 
-const warning=document.getElementById("skidWarning");
-
-function showWarning(){warning.style.display="flex";}
-function closeWarning(){warning.style.display="none";}
-
-document.addEventListener("contextmenu",function(e){e.preventDefault();showWarning();});
-let pressTimer;
-document.addEventListener("touchstart",function(){pressTimer=setTimeout(showWarning,600);});
-document.addEventListener("touchend",function(){clearTimeout(pressTimer);});
-document.addEventListener("keydown",function(e){
-if(e.key==="F12"){e.preventDefault();showWarning();}
-if(e.ctrlKey && e.shiftKey && e.key==="I"){e.preventDefault();showWarning();}
-if(e.ctrlKey && e.shiftKey && e.key==="J"){e.preventDefault();showWarning();}
-if(e.ctrlKey && e.key==="U"){e.preventDefault();showWarning();}
-});
+function animateTrail(){
+drawTrail();
+requestAnimationFrame(animateTrail);
+}
+animateTrail();
 
 </script>
 
 </body>
-
 </html>
