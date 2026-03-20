@@ -288,19 +288,17 @@ opacity:0.4;
 </div>
 
 <audio id="bgMusic" loop>
-<source src="mosthigh3.mp3" type="audio/mpeg">
+<source src="ovxrdose.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-// ENTER
 function enterSite(){
 document.querySelector(".enter").classList.add("fade");
 document.getElementById("bgMusic").play().catch(()=>{});
 startTypingLoop();
 }
 
-// BG
 const backgrounds=[
 "https://i.imgur.com/uFygyqT.gif",
 "https://i.imgur.com/WkRGm5F.gif",
@@ -335,7 +333,6 @@ setTimeout(loop,deleting?40:70);
 loop();
 }
 
-// 🔥 PARTICLE CURSOR
 const canvas = document.getElementById("trailCanvas");
 const ctx = canvas.getContext("2d");
 
