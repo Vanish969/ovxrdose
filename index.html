@@ -6,10 +6,20 @@
 <title>@ovxrdose</title>
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 <style>
+
+
+.revshit-text {
+  margin-top: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: white;
+  opacity: 0.6;
+  text-align: center;
+}
 
 *{
 margin:0;
@@ -26,18 +36,6 @@ color:white;
 font-family:sans-serif;
 }
 
-/* CANVAS TRAIL */
-#trailCanvas{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:9999;
-}
-
-/* ENTER */
 .enter{
 position:fixed;
 inset:0;
@@ -48,7 +46,7 @@ font-family:'Montserrat', sans-serif;
 font-size:30px;
 font-weight: 900;
 letter-spacing:2px;
-backdrop-filter:blur(30px);
+backdrop-filter:blur(6px);
 background:rgba(0,0,0,0.35);
 cursor:pointer;
 z-index:100;
@@ -60,13 +58,12 @@ opacity:0;
 pointer-events:none;
 }
 
-/* BG */
 .bg{
 position:absolute;
 inset:0;
 background-size:cover;
 background-position:center;
-filter:blur(18px) brightness(40%);
+filter:blur(2px) brightness(20%);
 animation:zoom 25s infinite alternate ease-in-out;
 }
 
@@ -75,7 +72,6 @@ from{transform:scale(1.05);}
 to{transform:scale(1.2);}
 }
 
-/* CARD */
 .card{
 position:absolute;
 top:50%;
@@ -102,9 +98,9 @@ text-align:center;
   background: conic-gradient(
       from 0deg,
       #0e0e0e,
-      #ffffff,
+      #000000,
       #888888,
-      #ffffff,
+      #000000,
       #000000,
       #ffffff,
       #000000,
@@ -150,23 +146,38 @@ text-align:center;
   100% { background-position: 0% 50%; }
 }
 
-/* TEXT */
 .username {
-  font-family: 'Inter',sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
   margin-top: 20px;
   font-size: 34px;
   letter-spacing: 0px;
   text-transform: lowercase;
-  text-shadow: 0 0 10px #fff;
-  background: linear-gradient(90deg, #ffffff 0%, #d9d9d9 50%, #ffffff 100%);
-  background-size: 200% 200%;
+
+
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #d9d9d9 25%,
+    #888888 50%,
+    #ffffff 75%,
+    #000000 100%
+  );
+
+  background-size: 300% auto;
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: namePop 0.5s ease-out both, nameGradient 6s ease-in-out infinite;
+
+  animation: namePop 0.5s ease-out both,
+             nameGradient 3s linear infinite;
+
   display: inline-block;
   position: relative;
   z-index: 1;
+
+
+  text-shadow: 0 0 6px rgba(255,255,255,0.25);
 }
 
 @keyframes namePop {
@@ -202,12 +213,6 @@ overflow:hidden;
 min-height:20px;
 }
 
-.revshit-text{
-margin-top:10px;
-font-size:14px;
-opacity:0.6;
-}
-
 .socials{
 margin-top:20px;
 display:flex;
@@ -225,12 +230,65 @@ font-size:11px;
 opacity:0.4;
 }
 
+
+.cursor-dot {
+  position:fixed;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:white;
+  pointer-events:none;
+  transform:translate(-50%, -50%);
+  z-index:9999;
+  opacity:0.8;
+  filter:drop-shadow(0 0 4px white);
+}
+
+#skidWarning{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99999;
+background:rgba(0,0,0,0.35);
+backdrop-filter:blur(25px);
+}
+
+.skid-box{
+text-align:center;
+font-family:'Bebas Neue',sans-serif;
+color:white;
+}
+
+.skid-box h1{
+letter-spacing:6px;
+font-size:32px;
+margin-bottom:10px;
+}
+
+.skid-box p{
+opacity:0.7;
+margin-bottom:20px;
+}
+
+.skid-box button{
+background:white;
+color:black;
+border:none;
+padding:10px 20px;
+border-radius:6px;
+font-family:'Bebas Neue',sans-serif;
+cursor:pointer;
+}
+
 </style>
 </head>
 
 <body>
-
-<canvas id="trailCanvas"></canvas>
 
 <div class="enter" onclick="enterSite()">doxx me</div>
 <div class="bg" id="bg"></div>
@@ -238,7 +296,6 @@ opacity:0.4;
 <div class="card">
 
 <div class="profile-wrapper">
-  <div class="ring"></div>
   <img src="https://i.imgur.com/Fe7dsbm.png" class="profile">
 </div>
 
@@ -251,14 +308,13 @@ opacity:0.4;
 </div>
 
 <div class="bio">
-<span id="typing"></span>
-<div class="revshit-text">772</div>
+  <span id="typing"></span>
+  <div class="revshit-text">772</div>
 </div>
 
-
 <div class="socials">
 <div class="socials">
-<a href="https://open.spotify.com/user/31x5u7mi6iduaumybgkdhaghq2ba?si=AIJDy0v0Qz2qfPqi7MdK0g" 
+  <a href="https://open.spotify.com/user/31x5u7mi6iduaumybgkdhaghq2ba?si=AIJDy0v0Qz2qfPqi7MdK0g" 
      target="_blank" rel="noopener noreferrer" aria-label="Spotify">
     <img src="https://cdn.simpleicons.org/spotify/ffffff" alt="Spotify">
   </a>
@@ -285,12 +341,22 @@ opacity:0.4;
 
 <div class="visits">visitors: <span id="visitCount">0</span></div>
 
-
 </div>
+
+
+
 
 <audio id="bgMusic" loop>
 <source src="ovxrdose.mp3" type="audio/mpeg">
 </audio>
+
+<div id="skidWarning">
+<div class="skid-box">
+<h1>WAG SKID PLZZZZZ</h1>
+<p>BAWAL TANGA RITO</p>
+<button onclick="closeWarning()">TANGA AKO GETS KO</button>
+</div>
+</div>
 
 <script>
 
@@ -301,21 +367,21 @@ startTypingLoop();
 }
 
 const backgrounds=[
-"https://i.imgur.com/uFygyqT.gif",
-"https://i.imgur.com/WkRGm5F.gif",
-"https://i.imgur.com/KtG0GJk.gif",
-"https://i.imgur.com/B1UipWZ.gif",
-"https://i.imgur.com/vWvOoTE.gif"
+"https://i.imgur.com/FQ6B5IN.gif",
+"https://i.imgur.com/pk9LtTg.gif",
+"https://i.imgur.com/IVT8skZ.gif",
+"https://i.imgur.com/g7FE1Fe.gif",
+"https://i.imgur.com/x3ExSPf.gif",
 ];
-document.getElementById("bg").style.backgroundImage=`url(${backgrounds[Math.floor(Math.random()*backgrounds.length)]})`;
 
-// VISITS
+document.getElementById("bg").style.backgroundImage =
+`url(${backgrounds[Math.floor(Math.random()*backgrounds.length)]})`;
+
 let visits=localStorage.getItem("visits");
 visits=visits?Number(visits)+1:1;
 localStorage.setItem("visits",visits);
 document.getElementById("visitCount").innerText=visits;
 
-// TYPING
 function startTypingLoop(){
 const text="my silence screams louder than words.";
 const el=document.getElementById("typing");
@@ -329,10 +395,26 @@ if(i>text.length){deleting=true;setTimeout(loop,1200);return;}
 el.textContent=text.substring(0,i--);
 if(i===0){deleting=false;}
 }
-setTimeout(loop,deleting?40:70);
+setTimeout(loop,deleting?50:90);
 }
 loop();
 }
+
+const warning=document.getElementById("skidWarning");
+
+function showWarning(){warning.style.display="flex";}
+function closeWarning(){warning.style.display="none";}
+
+document.addEventListener("contextmenu",function(e){e.preventDefault();showWarning();});
+let pressTimer;
+document.addEventListener("touchstart",function(){pressTimer=setTimeout(showWarning,600);});
+document.addEventListener("touchend",function(){clearTimeout(pressTimer);});
+document.addEventListener("keydown",function(e){
+if(e.key==="F12"){e.preventDefault();showWarning();}
+if(e.ctrlKey && e.shiftKey && e.key==="I"){e.preventDefault();showWarning();}
+if(e.ctrlKey && e.shiftKey && e.key==="J"){e.preventDefault();showWarning();}
+if(e.ctrlKey && e.key==="U"){e.preventDefault();showWarning();}
+});
 
 const canvas = document.getElementById("trailCanvas");
 const ctx = canvas.getContext("2d");
@@ -361,7 +443,7 @@ decay: 0.02
 });
 });
 
-// 👉 FUNCTION MO
+
 function drawTrail() {
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
