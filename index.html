@@ -5,485 +5,456 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>@ovxrdose</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
 <style>
-
-
-.revshit-text {
-  margin-top: 10px;
-  font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  color: white;
-  opacity: 0.6;
-  text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: auto;
 }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-cursor:none;
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: black;
+    color: white;
+    font-family: sans-serif;
 }
 
-body{
-height:100vh;
-overflow:hidden;
-background:black;
-color:white;
-font-family:sans-serif;
+.enter {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.35);
+    cursor: pointer;
+    z-index: 100;
+    transition: 1.2s ease;
 }
 
-.enter{
-position:fixed;
-inset:0;
-display:flex;
-justify-content:center;
-align-items:center;
-font-family:'Montserrat', sans-serif;
-font-size:30px;
-font-weight: 900;
-letter-spacing:2px;
-backdrop-filter:blur(6px);
-background:rgba(0,0,0,0.35);
-cursor:pointer;
-z-index:100;
-transition:1.2s ease;
+.enter.fade {
+    opacity: 0;
+    pointer-events: none;
 }
 
-.enter.fade{
-opacity:0;
-pointer-events:none;
+.bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(1px) brightness(30%);
+    animation: zoom 25s infinite alternate ease-in-out;
+    z-index: -2;
 }
 
-.bg{
-position:absolute;
-inset:0;
-background-size:cover;
-background-position:center;
-filter:blur(2px) brightness(20%);
-animation:zoom 25s infinite alternate ease-in-out;
+@keyframes zoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.2); }
 }
 
-@keyframes zoom{
-from{transform:scale(1.05);}
-to{transform:scale(1.2);}
-}
-
-.card{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
 }
 
 .profile-wrapper {
-  position: relative;
-  width: 135px;
-  height: 135px;
-  margin: 0 auto;
+    position: relative;
+    width: 135px;
+    height: 135px;
+    margin: 0 auto;
 }
 
 .profile-wrapper::before {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  border-radius: 200%;
-  background: conic-gradient(
-      from 0deg,
-      #0e0e0e,
-      #000000,
-      #888888,
-      #000000,
-      #000000,
-      #ffffff,
-      #000000,
-      #ffffff,
-     #000000
-  );
-  background-size: 400% 400%;
-  animation: borderAnimation 4s linear infinite;
-  transition: transform 0.3s ease;
-  z-index: 1;
-  filter: blur(8px);
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 200%;
+    background: conic-gradient(from 0deg, 
+       #0e0e0e,
+#000000,
+#888888,
+#000000,
+#000000,
+#ffffff,
+#000000,
+#ffffff,
+#000000
+          );
+    background-size: 400% 400%;
+    animation: borderAnimation 4s linear infinite;
+    transition: transform 0.3s ease;
+    z-index: 1;
+    filter: blur(8px);
 }
 
 .profile-wrapper::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  background: white;
-  filter: blur(12px);
-  z-index: 0;
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 100%;
+    background: white;
+    filter: blur(0px);
+    z-index: 0;
 }
 
 .profile {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  position: relative;
-  z-index: 2;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
 }
 
 @keyframes borderAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-
-@keyframes borderAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .username {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  margin-top: 20px;
-  font-size: 34px;
-  letter-spacing: 0px;
-  text-transform: lowercase;
-
-
-  background: linear-gradient(
-    90deg,
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 34px;
+    text-transform: lowercase;
+    background: linear-gradient(90deg, 
     #ffffff 0%,
     #d9d9d9 25%,
     #888888 50%,
     #ffffff 75%,
-    #000000 100%
-  );
-
-  background-size: 300% auto;
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: namePop 0.5s ease-out both,
-             nameGradient 3s linear infinite;
-
-  display: inline-block;
-  position: relative;
-  z-index: 1;
-
-
-  text-shadow: 0 0 6px rgba(255,255,255,0.25);
+    #000000 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: namePop 0.5s ease-out both, nameGradient 3s linear infinite;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 6px rgba(255,255,255,0.25);
 }
 
 @keyframes namePop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes nameGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.gif-row{
-margin-top:10px;
-display:flex;
-justify-content:center;
-gap:10px;
+.gif-row {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
-.gif-row img{
-width:45px;
-height:45px;
-border-radius:6px;
+.gif-row img {
+    width: 45px;
+    height: 45px;
+    border-radius: 6px;
 }
 
-.bio{
-margin-top:12px;
-font-family:'Playfair Display', serif;
-font-size:16px;
-white-space:nowrap;
-overflow:hidden;
-min-height:20px;
+.bio {
+    margin-top: 12px;
+    font-family: 'Cutive Mono', monospace;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.socials{
-margin-top:20px;
-display:flex;
-justify-content:center;
-gap:18px;
+.revshit-text {
+    margin-top: 4px;
+    font-family: 'Playfair Display',serif;
+    font-size: 14px;
+    color: white;
+    opacity: 0.9;
+    text-align: center;
 }
 
-.socials img{
-width:26px;
+.socials {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
 }
 
-.visits{
-margin-top:20px;
-font-size:11px;
-opacity:0.4;
+.socials img {
+    width: 26px;
 }
 
+.visits {
+    margin-top: 20px;
+    font-size: 11px;
+    opacity: 0.4;
+}
 
 .cursor-dot {
-  position:fixed;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:white;
-  pointer-events:none;
-  transform:translate(-50%, -50%);
-  z-index:9999;
-  opacity:0.8;
-  filter:drop-shadow(0 0 4px white);
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 4px white);
 }
 
-#skidWarning{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:none;
-justify-content:center;
-align-items:center;
-z-index:99999;
-background:rgba(0,0,0,0.35);
-backdrop-filter:blur(25px);
+#fallingDots {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
 }
 
-.skid-box{
-text-align:center;
-font-family:'Bebas Neue',sans-serif;
-color:white;
+#skidWarning {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(25px);
+    display: none;
 }
 
-.skid-box h1{
-letter-spacing:6px;
-font-size:32px;
-margin-bottom:10px;
+.skid-box {
+    text-align:center;
+    font-family:'Bebas Neue',sans-serif;
+    color:white;
 }
 
-.skid-box p{
-opacity:0.7;
-margin-bottom:20px;
-}
+.skid-box h1 { letter-spacing:6px; font-size:32px; margin-bottom:10px; }
+.skid-box p { opacity:0.7; margin-bottom:20px; }
+.skid-box button { background:white;color:black;border:none;padding:10px 20px;border-radius:6px;font-family:'Bebas Neue',sans-serif; cursor:pointer; }
 
-.skid-box button{
-background:white;
-color:black;
-border:none;
-padding:10px 20px;
-border-radius:6px;
-font-family:'Bebas Neue',sans-serif;
-cursor:pointer;
+.toggle-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 99999;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
 </style>
 </head>
-
 <body>
 
+<canvas id="fallingDots"></canvas>
+<div class="toggle-btn" id="toggleBtn"></div>
 <div class="enter" onclick="enterSite()">doxx me</div>
 <div class="bg" id="bg"></div>
 
 <div class="card">
-
-<div class="profile-wrapper">
-  <img src="https://i.imgur.com/Fe7dsbm.png" class="profile">
-</div>
-
-<div class="username">ovxrdose</div>
-
-<div class="gif-row">
-<img src="https://cdn.discordapp.com/emojis/1181217742850891807.gif">
+    <div class="profile-wrapper">
+        <img src="https://i.imgur.com/Fe7dsbm.png" class="profile">
+    </div>
+    <div class="username">ovxrdose</div>
+    <div class="gif-row">
+        <img src="https://cdn.discordapp.com/emojis/1181217742850891807.gif">
 <img src="https://cdn.discordapp.com/emojis/1441763213980074138.gif">
 <img src="https://cdn.discordapp.com/emojis/1197092976892059658.gif">
+    </div>
+    <div class="bio"><span id="typing"></span></div>
+    <div class="revshit-text">772</div>
+    <div class="socials">
+        <a href="https://open.spotify.com/user/31x5u7mi6iduaumybgkdhaghq2ba?si=AIJDy0v0Qz2qfPqi7MdK0g" target="_blank"><img src="https://cdn.simpleicons.org/spotify/ffffff"></a>
+        <a href="https://discord.com/users/958614271221182484" target="_blank"><img src="https://cdn.simpleicons.org/discord/ffffff"></a>
+        <a href="https://www.instagram.com/ovxrdosez_" target="_blank"><img src="https://cdn.simpleicons.org/instagram/ffffff"></a>
+        <a href="https://www.roblox.com/users/5509864597/profile" target="_blank"><img src="https://cdn.simpleicons.org/roblox/ffff"></a>
 </div>
-
-<div class="bio">
-  <span id="typing"></span>
-  <div class="revshit-text">772</div>
+    <div class="visits">visitors: <span id="visitCount">0</span></div>
 </div>
-
-<div class="socials">
-<div class="socials">
-  <a href="https://open.spotify.com/user/31x5u7mi6iduaumybgkdhaghq2ba?si=AIJDy0v0Qz2qfPqi7MdK0g" 
-     target="_blank" rel="noopener noreferrer" aria-label="Spotify">
-    <img src="https://cdn.simpleicons.org/spotify/ffffff" alt="Spotify">
-  </a>
-
-  <!-- Roblox -->
-  <a href="https://www.roblox.com/users/5509864597/profile" 
-     target="_blank" rel="noopener noreferrer" aria-label="Roblox">
-    <img src="https://cdn.simpleicons.org/roblox/ffffff" alt="Roblox">
-  </a>
-
-  <!-- Discord -->
-  <a href="https://discord.com/users/958614271221182484" 
-     target="_blank" rel="noopener noreferrer" aria-label="Discord">
-    <img src="https://cdn.simpleicons.org/discord/ffffff" alt="Discord">
-  </a>
-
-  <!-- Instagram -->
-  <a href="https://www.instagram.com/ovxrdosez_" 
-     target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-    <img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram">
-  </a>
-</div>
-</div>
-
-<div class="visits">visitors: <span id="visitCount">0</span></div>
-
-</div>
-
-
-
 
 <audio id="bgMusic" loop>
-<source src="ovxrdose.mp3" type="audio/mpeg">
+    <source src="ovxrdose.mp3" type="audio/mpeg">
 </audio>
 
 <div id="skidWarning">
-<div class="skid-box">
-<h1>WAG SKID PLZZZZZ</h1>
-<p>BAWAL TANGA RITO</p>
-<button onclick="closeWarning()">TANGA AKO GETS KO</button>
+    <div class="skid-box">
+        <h1>WAG SKID PLZZZZZ</h1>
+        <p>BAWAL TANGA RITO</p>
+        <button onclick="closeWarning()">TANGA AKO GETS KO</button>
+    </div>
 </div>
-</div>
+
+<div class="cursor-dot" id="cursor"></div>
+<canvas id="trailCanvas" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9998;"></canvas>
 
 <script>
+// Falling dots
+const dotsCanvas = document.getElementById('fallingDots');
+const dotsCtx = dotsCanvas.getContext('2d');
+function resizeDotsCanvas(){ dotsCanvas.width = window.innerWidth; dotsCanvas.height = window.innerHeight; }
+resizeDotsCanvas();
+window.addEventListener('resize', resizeDotsCanvas);
 
+const dots = [];
+const dotCount = 200;
+for(let i=0; i<dotCount; i++){
+    dots.push({x:Math.random()*dotsCanvas.width, y:Math.random()*dotsCanvas.height, r:Math.random()*2+1, speed:Math.random()*1.5+0.5});
+}
+
+function drawDots(){
+    dotsCtx.clearRect(0,0,dotsCanvas.width,dotsCanvas.height);
+    dots.forEach(dot=>{
+        dotsCtx.beginPath();
+        dotsCtx.arc(dot.x, dot.y, dot.r, 0, Math.PI*2);
+        dotsCtx.fillStyle='rgba(255,255,255,0.9)';
+        dotsCtx.shadowColor='white';
+        dotsCtx.shadowBlur=6;
+        dotsCtx.fill();
+        dot.y += dot.speed;
+        if(dot.y > dotsCanvas.height){ dot.y=-dot.r; dot.x=Math.random()*dotsCanvas.width; }
+    });
+    requestAnimationFrame(drawDots);
+}
+drawDots();
+
+// Enter Site
 function enterSite(){
-document.querySelector(".enter").classList.add("fade");
-document.getElementById("bgMusic").play().catch(()=>{});
-startTypingLoop();
+    document.querySelector(".enter").classList.add("fade");
+    document.getElementById("bgMusic").play().catch(()=>{});
+    startTypingLoop();
 }
 
-const backgrounds=[
-"https://i.imgur.com/FQ6B5IN.gif",
-"https://i.imgur.com/pk9LtTg.gif",
-"https://i.imgur.com/BQoin5V.gif",
-"https://i.imgur.com/g7FE1Fe.gif",
-"https://i.imgur.com/x3ExSPf.gif",
+// Backgrounds
+const backgrounds = [
+"https://i.imgur.com/uFygyqT.gif",
+"https://i.imgur.com/WkRGm5F.gif",
+"https://i.imgur.com/KtG0GJk.gif",
+"https://i.imgur.com/B1UipWZ.gif",
+"https://i.imgur.com/vWvOoTE.gif"
 ];
+document.getElementById("bg").style.backgroundImage = `url(${backgrounds[Math.floor(Math.random()*backgrounds.length)]})`;
 
-document.getElementById("bg").style.backgroundImage =
-`url(${backgrounds[Math.floor(Math.random()*backgrounds.length)]})`;
+// Visits counter
+let visits = localStorage.getItem("visits");
+visits = visits ? Number(visits)+1 : 1;
+localStorage.setItem("visits", visits);
+document.getElementById("visitCount").innerText = visits;
 
-let visits=localStorage.getItem("visits");
-visits=visits?Number(visits)+1:1;
-localStorage.setItem("visits",visits);
-document.getElementById("visitCount").innerText=visits;
-
+// Typing loop
 function startTypingLoop(){
-const text="my silence screams louder than words.";
-const el=document.getElementById("typing");
-let i=0,deleting=false;
-
-function loop(){
-if(!deleting){
-el.textContent=text.substring(0,i++);
-if(i>text.length){deleting=true;setTimeout(loop,1200);return;}
-}else{
-el.textContent=text.substring(0,i--);
-if(i===0){deleting=false;}
+    const text = "my silence screams louder than words.";
+    const el = document.getElementById("typing");
+    let i=0, deleting=false;
+    function loop(){
+        if(!deleting){
+            el.textContent = text.substring(0,i++);
+            if(i > text.length){ deleting=true; setTimeout(loop,1200); return; }
+        } else {
+            el.textContent = text.substring(0,i--);
+            if(i===0) deleting=false;
+        }
+        setTimeout(loop, deleting?50:90);
+    }
+    loop();
 }
-setTimeout(loop,deleting?50:90);
-}
-loop();
-}
 
-const warning=document.getElementById("skidWarning");
-
-function showWarning(){warning.style.display="flex";}
-function closeWarning(){warning.style.display="none";}
-
-document.addEventListener("contextmenu",function(e){e.preventDefault();showWarning();});
+// Skid warning
+const warning = document.getElementById("skidWarning");
+function showWarning(){ warning.style.display="flex"; }
+function closeWarning(){ warning.style.display="none"; }
+document.addEventListener("contextmenu", e=>{ e.preventDefault(); showWarning(); });
 let pressTimer;
-document.addEventListener("touchstart",function(){pressTimer=setTimeout(showWarning,600);});
-document.addEventListener("touchend",function(){clearTimeout(pressTimer);});
-document.addEventListener("keydown",function(e){
-if(e.key==="F12"){e.preventDefault();showWarning();}
-if(e.ctrlKey && e.shiftKey && e.key==="I"){e.preventDefault();showWarning();}
-if(e.ctrlKey && e.shiftKey && e.key==="J"){e.preventDefault();showWarning();}
-if(e.ctrlKey && e.key==="U"){e.preventDefault();showWarning();}
+document.addEventListener("touchstart", ()=>{ pressTimer=setTimeout(showWarning,600); });
+document.addEventListener("touchend", ()=>{ clearTimeout(pressTimer); });
+document.addEventListener("keydown", e=>{
+    if(e.key==="F12" || (e.ctrlKey && e.shiftKey && (e.key==="I"||e.key==="J")) || (e.ctrlKey && e.key==="U")) { e.preventDefault(); showWarning(); }
 });
 
-const canvas = document.getElementById("trailCanvas");
-const ctx = canvas.getContext("2d");
-
+// Cursor trail
+const trailCanvas = document.getElementById("trailCanvas");
+const ctx = trailCanvas.getContext("2d");
 let SCALE = window.devicePixelRatio || 1;
-
-function resizeCanvas(){
-canvas.width = window.innerWidth * SCALE;
-canvas.height = window.innerHeight * SCALE;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+function resizeCanvas(){ trailCanvas.width=window.innerWidth*SCALE; trailCanvas.height=window.innerHeight*SCALE; }
+resizeCanvas(); window.addEventListener("resize", resizeCanvas);
 
 let trail = [];
 const maxTrail = 40;
-
 document.addEventListener("mousemove", e=>{
-trail.push({
-x: e.clientX * SCALE,
-y: e.clientY * SCALE,
-vx: (Math.random()-0.5)*1.5,
-vy: (Math.random()-0.5)*1.5,
-r: Math.random()*3+1,
-life: 1,
-decay: 0.02
-});
+    trail.push({x:e.clientX*SCALE, y:e.clientY*SCALE, vx:(Math.random()-0.5)*1.5, vy:(Math.random()-0.5)*1.5, r:Math.random()*3+1, life:1, decay:0.02});
 });
 
-
-function drawTrail() {
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-ctx.shadowColor = 'rgba(255,255,255,0.8)';
-ctx.shadowBlur = 6 * SCALE;
-
-let active = 0;
-
-for (const p of trail) {
-if (p.life <= 0) continue;
-
-active++;
-
-p.x += p.vx;
-p.y += p.vy;
-p.vy += 0.01;
-
-p.life -= p.decay;
-p.scale = Math.max(0, p.life);
-
-ctx.globalAlpha = p.life;
-ctx.fillStyle = '#ffffff';
-
-ctx.beginPath();
-ctx.arc(p.x, p.y, p.r * p.scale, 0, Math.PI * 2);
-ctx.fill();
-
-if (active > maxTrail) break;
+function drawTrail(){
+    ctx.clearRect(0,0,trailCanvas.width,trailCanvas.height);
+    ctx.shadowColor='rgba(255,255,255,0.8)';
+    ctx.shadowBlur=6*SCALE;
+    let active=0;
+    for(const p of trail){
+        if(p.life<=0) continue;
+        active++;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.01;
+        p.life -= p.decay;
+        p.scale = Math.max(0, p.life);
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle='#ffffff';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r*p.scale, 0, Math.PI*2);
+        ctx.fill();
+        if(active>maxTrail) break;
+    }
+    ctx.shadowBlur=0; ctx.globalAlpha=1;
 }
-
-ctx.shadowBlur = 0;
-ctx.globalAlpha = 1;
-}
-
-function animateTrail(){
-drawTrail();
-requestAnimationFrame(animateTrail);
-}
+function animateTrail(){ drawTrail(); requestAnimationFrame(animateTrail); }
 animateTrail();
 
+// Cursor dot
+const cursor = document.getElementById("cursor");
+document.addEventListener("mousemove", e=>{
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+});
+
+// Toggle button
+const toggleBtn = document.getElementById("toggleBtn");
+let darkMode = false;
+toggleBtn.addEventListener("click", ()=>{
+    darkMode = !darkMode;
+    dotsCanvas.style.background = darkMode ? 'rgba(0,0,0,1)' : 'transparent';
+});
 </script>
 
 </body>
