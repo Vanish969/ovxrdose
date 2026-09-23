@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>@cloud</title>
+<link id="favicon" rel="icon" href="">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-loading">
+<div id="enter-screen"><div class="enter-text">CLICK TO ENTER</div><div class="enter-hint"></div></div>
+<img id="background" src="assets/background.jpg" alt="">
+<div class="grain"></div><div class="dark-overlay"></div>
+
+
+
+<main class="center"><div class="profile">
+<div class="avatar-wrap">
+<img id="avatar" class="avatar" src="assets/profile.jpg" alt="Discord profile picture">
+<img id="avatar-decoration" class="avatar-decoration" alt="">
+<span id="status-dot" class="status-dot"></span>
+</div>
+<div class="crown"></div>
+<div class="name-row">
+    <h1 id="name"></h1>
+
+    <span id="server-tag" class="server-tag">
+        <img id="server-tag-icon" class="server-tag-icon" alt="">
+        <span id="server-tag-text"></span>
+    </span>
+</div>
+<div class="handle" id="handle"></div>
+<div class="bio" id="bio"></div>
+<div class="socials">
+
+    <a href="https://discord.com/users/958614271221182484" target="_blank"
+       rel="noopener noreferrer" aria-label="Discord">
+        <img src="https://cdn.simpleicons.org/discord/ffffff" alt="Discord">
+    </a>
+
+    <a href="https://youtube.com/@cloudheartrev" target="_blank"
+       rel="noopener noreferrer" aria-label="YouTube">
+        <img src="https://cdn.simpleicons.org/youtube/ffffff" alt="YouTube">
+    </a>
+
+    <a href="https://roblox.com/users/4675696526/profile" target="_blank"
+       rel="noopener noreferrer" aria-label="Roblox">
+        <img src="https://cdn.simpleicons.org/roblox/ffffff" alt="Roblox">
+    </a>
+
+    <a href="https://open.spotify.com/user/31x5u7mi6iduaumybgkdhaghq2ba?si=b32-WllTQ4yIs-l6vN0N4Q&utm_source=copy-link" target="_blank"
+       rel="noopener noreferrer" aria-label="Spotify">
+        <img src="https://cdn.simpleicons.org/spotify/ffffff" alt="Spotify">
+    </a>
+
+</div>
+
+<div class="player" id="player">
+
+    <button id="music-play" class="music-play">▶</button>
+
+    <img id="album" src="assets/album.jpg" alt="Album art">
+
+    <div class="track">
+        <div class="track-title" id="track-title">TBH</div>
+        <div class="track-artist" id="track-artist">PARTYNEXTDOOR</div>
+
+        <div class="song-indicator">
+            <span id="current-time">0:00</span>
+
+            <input id="progress" type="range" min="0" max="100" value="0">
+
+            <span id="duration">0:00</span>
+        </div>
+    </div>
+
+    <div class="volume-control">
+        <span class="volume-icon">🔊</span>
+
+        <input id="volume"
+               type="range"
+               min="0"
+               max="1"
+               step="0.01"
+               value="0.25">
+    </div>
+
+</div>
+
+<audio id="audio" src="assets/song.mp3" preload="metadata"></audio>
+<div class="activity-section" id="activity-section">
+
+    <div class="activity-heading">LIVE ACTIVITY</div>
+
+    <div id="activities"></div>
+
+</div>
+</div></main>
+
+<div class="enter-bottom"><div class="cross"></div></div>
+<script src="script.js"></script>
+</body>
+</html>
