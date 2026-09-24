@@ -583,4 +583,121 @@ body:not(.page-loading) .avatar{opacity:1;transform:scale(1)}
     box-shadow: none;
 }
 
+.spotify-section{
+    margin-top:32px;
+}
 
+.spotify-heading{
+    color:#aaa;
+    font-family:Cinzel,Georgia,serif;
+    font-size:16px;
+    letter-spacing:.08em;
+    margin-bottom:14px;
+}
+
+.spotify-card{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.spotify-image{
+    width:72px;
+    height:72px;
+    border-radius:6px;
+    object-fit:cover;
+    background:#111;
+    flex-shrink:0;
+}
+
+.spotify-info{
+    min-width:0;
+}
+
+.spotify-song{
+    color:#eee;
+    font-family:Cinzel,Georgia,serif;
+    font-size:17px;
+    font-weight:600;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.spotify-artist{
+    color:#aaa;
+    font-size:11px;
+    margin-top:7px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.spotify-album{
+    color:#666;
+    font-size:9px;
+    margin-top:5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+@media(max-width:650px){
+
+    .spotify-section{
+        margin-top:25px;
+    }
+
+    .spotify-image{
+        width:60px;
+        height:60px;
+    }
+
+    .spotify-song{
+        font-size:14px;
+    }
+
+}
+
+.activity-image-wrap{
+    position:relative;
+    width:72px;
+    height:72px;
+    flex-shrink:0;
+}
+
+.activity-image-wrap .activity-image{
+    width:72px;
+    height:72px;
+}
+
+.activity-small-image{
+    position:absolute;
+    right:-5px;
+    bottom:-5px;
+    width:25px;
+    height:25px;
+    border-radius:6px;
+    object-fit:cover;
+    border:2px solid #000;
+    background:#111;
+}
+
+@media(max-width:650px){
+
+    .activity-image-wrap{
+        width:60px;
+        height:60px;
+    }
+
+    .activity-image-wrap .activity-image{
+        width:60px;
+        height:60px;
+    }
+
+    .activity-small-image{
+        width:22px;
+        height:22px;
+    }
+
+                    }
