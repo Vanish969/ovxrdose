@@ -87,7 +87,7 @@ if (favicon) {
         : "offline";
 
     $("status-dot").className = "status-dot " + status;
-    updateActivities(d.activities || []);
+updateActivities(d.activities || [], d.spotify);
 }
 
 async function fetchLanyard() {
@@ -108,118 +108,222 @@ async function fetchLanyard() {
         console.error("Lanyard error:", error);
     }
 }
-function updateActivities(activities) {
+
+/* DISCORD APP ICON CACHE */
+
+const appIconCache = {};
+
+async function getAppIcon(applicationId) {
+
+    if (!applicationId) return "";
+
+    if (appIconCache[applicationId]) {
+        return appIconCache[applicationId];
+    }
+
+    try {
+
+        /*
+         * Discord's application metadata contains
+         * the application's icon hash.
+         */
+
+        const response = await fetch(
+            `https://discord.com/api/v10/applications/${applicationId}`
+        );
+
+        if (!response.ok) return "";
+
+        const app = await response.json();
+
+        if (!app.icon) return "";
+
+        const icon =
+            `https://cdn.discordapp.com/app-icons/${applicationId}/${app.icon}.png?size=512`;
+
+        appIconCache[applicationId] = icon;
+
+        return icon;
+
+    } catch (error) {
+
+        console.error(
+            "Application icon error:",
+            applicationId,
+            error
+        );
+
+        return "";
+    }
+}
+
+function updateActivities(activities, spotify) {
 
     const container = $("activities");
 
     if (!container) return;
 
-    const visible = activities.filter(activity => {
-
-        return activity.type !== 2;
-
-    });
-
-    if (!visible.length) {
-
-        container.innerHTML = `
-            <div class="activity-card">
-                <div class="activity-empty">
-                    NO ACTIVE ACTIVITY
-                </div>
-            </div>
-        `;
-
-        return;
-    }
-
     container.innerHTML = "";
 
-    visible.forEach(activity => {
+    console.log("ACTIVITIES:", activities);
+    console.log("SPOTIFY DATA:", spotify);
+
+    /* ALL DISCORD ACTIVITIES */
+
+    activities.forEach(activity => {
 
         const card = document.createElement("div");
         card.className = "activity-card";
 
+        /* ACTIVITY TYPE */
+
         let type = "ACTIVITY";
 
-        if (activity.type === 0) {
-            type = "PLAYING";
-        }
+        if (activity.type === 0) type = "PLAYING";
+        if (activity.type === 1) type = "STREAMING";
+        if (activity.type === 2) type = "LISTENING";
+        if (activity.type === 3) type = "WATCHING";
+        if (activity.type === 4) type = "CUSTOM STATUS";
+        if (activity.type === 5) type = "COMPETING";
 
-        if (activity.type === 1) {
-            type = "STREAMING";
-        }
+        /* IMAGES */
 
-        if (activity.type === 3) {
-            type = "WATCHING";
-        }
+let largeImage = "";
+let smallImage = "";
 
-        if (activity.type === 5) {
-            type = "COMPETING";
-        }
+/* LARGE ACTIVITY IMAGE */
 
-        let image = "";
-
-        if (activity.assets?.large_image) {
+if (activity.assets?.large_image) {
 
     const large = activity.assets.large_image;
 
     if (large.startsWith("mp:")) {
 
-        image =
+        largeImage =
             "https://media.discordapp.net/" +
             large.substring(3);
 
     } else if (activity.application_id) {
 
-        image =
-            `https://cdn.discordapp.com/app-assets/${activity.application_id}/${large}.png`;
+        largeImage =
+            `https://cdn.discordapp.com/app-assets/${activity.application_id}/${large}.png?size=512`;
 
     }
 
 }
 
-        if (!image && activity.application_id) {
+/* SMALL ACTIVITY IMAGE */
 
-            image =
-                `https://cdn.discordapp.com/app-icons/${activity.application_id}/${activity.application_id}.png?size=128`;
+if (activity.assets?.small_image) {
 
-        }
+    const small = activity.assets.small_image;
+
+    if (small.startsWith("mp:")) {
+
+        smallImage =
+            "https://media.discordapp.net/" +
+            small.substring(3);
+
+    } else if (activity.application_id) {
+
+        smallImage =
+            `https://cdn.discordapp.com/app-assets/${activity.application_id}/${small}.png?size=256`;
+
+    }
+
+}
+
+        /* DETAILS */
 
         const details = activity.details || "";
         const state = activity.state || "";
+
+        /* ELAPSED TIME */
 
         let timestamp = "";
 
         if (activity.timestamps?.start) {
 
-            const elapsed =
-                Math.floor((Date.now() - activity.timestamps.start) / 1000);
+            const elapsed = Math.floor(
+                (Date.now() - activity.timestamps.start) / 1000
+            );
 
-            if (elapsed > 0) {
+            if (elapsed >= 0) {
 
                 const hours = Math.floor(elapsed / 3600);
-                const minutes = Math.floor((elapsed % 3600) / 60);
+
+                const minutes = Math.floor(
+                    (elapsed % 3600) / 60
+                );
+
+                const seconds = elapsed % 60;
 
                 if (hours > 0) {
-                    timestamp = `${hours}h ${minutes}m elapsed`;
+
+                    timestamp =
+                        `${hours}h ${minutes}m elapsed`;
+
+                } else if (minutes > 0) {
+
+                    timestamp =
+                        `${minutes}m ${seconds}s elapsed`;
+
                 } else {
-                    timestamp = `${minutes}m elapsed`;
+
+                    timestamp =
+                        `${seconds}s elapsed`;
+
                 }
 
             }
 
         }
 
+        /* IMAGE */
+
+        let imageHTML = "";
+
+        if (largeImage) {
+
+            imageHTML = `
+                <div class="activity-image-wrap">
+
+                    <img
+                        class="activity-image"
+                        src="${largeImage}"
+                        alt=""
+                    >
+
+                    ${
+                        smallImage
+                        ? `
+                            <img
+                                class="activity-small-image"
+                                src="${smallImage}"
+                                alt=""
+                            >
+                        `
+                        : ""
+                    }
+
+                </div>
+            `;
+
+        } else {
+
+            imageHTML = `
+                <div class="activity-image"></div>
+            `;
+
+        }
+
+        /* CARD */
+
         card.innerHTML = `
 
             <div class="activity-main">
 
-                ${
-                    image
-                    ? `<img class="activity-image" src="${image}" alt="">`
-                    : `<div class="activity-image"></div>`
-                }
+                ${imageHTML}
 
                 <div class="activity-info">
 
@@ -233,19 +337,31 @@ function updateActivities(activities) {
 
                     ${
                         details
-                        ? `<div class="activity-details">${details}</div>`
+                        ? `
+                            <div class="activity-details">
+                                ${details}
+                            </div>
+                        `
                         : ""
                     }
 
                     ${
                         state
-                        ? `<div class="activity-state">${state}</div>`
+                        ? `
+                            <div class="activity-state">
+                                ${state}
+                            </div>
+                        `
                         : ""
                     }
 
                     ${
                         timestamp
-                        ? `<div class="activity-state">${timestamp}</div>`
+                        ? `
+                            <div class="activity-state">
+                                ${timestamp}
+                            </div>
+                        `
                         : ""
                     }
 
@@ -255,24 +371,36 @@ function updateActivities(activities) {
 
         `;
 
+        /* BUTTONS */
+
         if (activity.buttons?.length) {
 
-            const buttons = document.createElement("div");
+            const buttons =
+                document.createElement("div");
 
-            buttons.className = "activity-buttons";
+            buttons.className =
+                "activity-buttons";
 
             activity.buttons.forEach((button, index) => {
 
-                const url = activity.metadata?.button_urls?.[index];
+                const url =
+                    activity.metadata?.button_urls?.[index];
 
                 if (!url) return;
 
-                const a = document.createElement("a");
+                const a =
+                    document.createElement("a");
 
-                a.className = "activity-button";
+                a.className =
+                    "activity-button";
+
                 a.href = url;
+
                 a.target = "_blank";
-                a.rel = "noopener noreferrer";
+
+                a.rel =
+                    "noopener noreferrer";
+
                 a.textContent = button;
 
                 buttons.appendChild(a);
@@ -280,23 +408,36 @@ function updateActivities(activities) {
             });
 
             if (buttons.children.length) {
+
                 card.appendChild(buttons);
+
             }
 
         }
+
+        /* STREAM BUTTON */
 
         if (
             activity.type === 1 &&
             activity.url
         ) {
 
-            const stream = document.createElement("a");
+            const stream =
+                document.createElement("a");
 
-            stream.className = "activity-stream";
-            stream.href = activity.url;
+            stream.className =
+                "activity-stream";
+
+            stream.href =
+                activity.url;
+
             stream.target = "_blank";
-            stream.rel = "noopener noreferrer";
-            stream.textContent = "▶  Watch Stream";
+
+            stream.rel =
+                "noopener noreferrer";
+
+            stream.textContent =
+                "▶  Watch Stream";
 
             card.appendChild(stream);
 
@@ -306,8 +447,73 @@ function updateActivities(activities) {
 
     });
 
-}
 
+    /* NO ACTIVITY */
+
+    if (!activities.length && !spotify) {
+
+        container.innerHTML = `
+            <div class="activity-card">
+
+                <div class="activity-empty">
+                    NO ACTIVE ACTIVITY
+                </div>
+
+            </div>
+        `;
+
+    }
+
+
+    /* SPOTIFY */
+
+    if (spotify) {
+
+        const spotifySection =
+            document.createElement("div");
+
+        spotifySection.className =
+            "spotify-section";
+
+        spotifySection.innerHTML = `
+
+            <div class="spotify-heading">
+                LISTENING TO SPOTIFY
+            </div>
+
+            <div class="spotify-card">
+
+                <img
+                    class="spotify-image"
+                    src="${spotify.album_art_url || ""}"
+                    alt=""
+                >
+
+                <div class="spotify-info">
+
+                    <div class="spotify-song">
+                        ${spotify.song || "Unknown Song"}
+                    </div>
+
+                    <div class="spotify-artist">
+                        by ${spotify.artist || "Unknown Artist"}
+                    </div>
+
+                    <div class="spotify-album">
+                        on ${spotify.album || "Unknown Album"}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+        container.appendChild(spotifySection);
+
+    }
+
+}
 
 /* MUSIC PLAYER */
 
